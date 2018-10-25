@@ -1,0 +1,15 @@
+.box-fit {
+  padding: 100px 0px;
+  opacity: 0.7;
+}
+.item {
+  padding: 30px;
+  color: #fff;
+  font-weight: 600;
+}
+.texto-fit {
+  padding: 100px 0px;
+  line-height: 50px;
+  width: 70%;
+  margin: auto;
+}
