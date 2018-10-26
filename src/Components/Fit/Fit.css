@@ -1,6 +1,5 @@
 .box-fit {
   padding: 100px 0px;
-  opacity: 0.7;
 }
 .item {
   padding: 30px;
@@ -12,4 +11,21 @@
   line-height: 50px;
   width: 70%;
   margin: auto;
+}
+.nav {
+  background: #fff;
+  opacity: 0.9;
+  font-size: 14px !important;
+  border-bottom: 1px solid #eaeaea;
+}
+.image-modal {
+  width: 30%;
+  padding: 5px 15px 0px 0px;
+  float: left;
+}
+.modal-dialog {
+  max-width: 800px !important;
+}
+.slide {
+  width: 100%;
 }

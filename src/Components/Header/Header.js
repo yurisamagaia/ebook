@@ -26,19 +26,13 @@ class Header extends Component {
           <Collapse navbar>
             <Nav className="auto" navbar>
               <NavItem>
-                <NavLink href="#company" className="menu-item">QUEM SOMOS</NavLink>
+                <NavLink href="#fit" className="menu-item">EMAGRECIMENTO & FIT</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="#comments" className="menu-item">DEPOIMENTOS</NavLink>
+                <NavLink href="#coach" className="menu-item">COACH</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="#services" className="menu-item">SERVIÇOS</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="#consult" className="menu-item">CONSULTAR ENTREGAS</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="#contact" className="menu-item">CONTATO</NavLink>
+                <NavLink href="#pet" className="menu-item">PETS & NATUREZA</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
