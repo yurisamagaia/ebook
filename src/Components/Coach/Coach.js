@@ -9,66 +9,94 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import { Card, CardImg, CardText, CardBody, CardLink, CardTitle, CardSubtitle, Container, Row, Col, Button } from 'reactstrap';
+
+
+const ProductItem = ({ category, name }) => (
+  <Card className="box flex-spread">
+    <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
+    <CardBody className={`category--${category}`}>
+      <CardTitle>{name}</CardTitle>
+      <CardSubtitle>Card subtitle</CardSubtitle>
+      <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+      <Button>Button</Button>
+    </CardBody>
+  </Card>
+);
+
+const ProductItems = ({ state: { products, displayCategory } }) => (
+  <div>
+    {products.filter(({ category }) => displayCategory === category || displayCategory === "all").map(({ category, name }) => (
+      <ProductItem key={`ProductItems-${name}`} category={category} name={name} />
+    ))}
+  </div>
+);
+
+const ButtonCategories = (productCategories, setCategory ) => (
+  productCategories.map((category) => (
+    <Button color="primary" key={category} className={`btn-${category}`} onClick={() => setCategory(category)}>
+      {category}
+    </Button>
+  ))
+);
+
+const UI = ({
+    state,
+    state: { productCategories },
+    setCategory,
+    allProducts
+  }) => (
+    <Container>
+      <Row>
+        <Col xs="12">
+          {ButtonCategories(productCategories, setCategory )}
+        </Col>
+      </Row>
+      <Row>
+        <Col xs="12">
+          <ProductItems state={state} />
+        </Col>
+      </Row>
+   </Container>
+);
+
+const PRODUCTS = [
+  { category: "entertainment", name: "Football" },
+  { category: "entertainment", name: "Baseball" },
+  { category: "entertainment", name: "Basketball" },
+  { category: "fashion", name: "iPod Touch" },
+  { category: "design", name: "iPhone 5" },
+  { category: "design", name: "Nexus 7" },
+  { category: "leisure", name: "Holiday" }
+];
+
+// get unique category items
+const uniqueItems = (x, i, array) => array.indexOf(x) === i;
+const PRODUCT_CATEGORIES = PRODUCTS.map(prod => prod.category).filter(
+  uniqueItems
+);
+
+PRODUCT_CATEGORIES.push("all");
+PRODUCT_CATEGORIES.sort();
+
 class Coach extends Component {
-  render() {
-    const remote = './flex.png';
-    const settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 7,
-      slidesToScroll: 1
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      displayCategory: "all",
+      products: PRODUCTS,
+      productCategories: PRODUCT_CATEGORIES
     };
-    return (
-      <div>
-        <div className="texto-fit">
-          <h2>Conteúdo Fitness</h2>
-          Ser fitness vai muito além do que ter aquele corpão sarado de academia.
-          O conceito evoluiu muito e, felizmente, não se refere apenas à prática de atividade física com objetivos estéticos. É muito mais que isso: fitness é a busca pelo bem estar! É o potencializador de diversas atitudes positivas que podem deixar nossa vida muito mais saudável.
-          Procure atividades físicas diferentes e tente encaixá-las em seus momentos de lazer. Eu não canso de falar que uma corridinha ou pedalada ao ar livre são ótimas para dar uma descontraída no fim de semana! O mesmo vale para alimentação.
-          E, você, o que está esperando para investir em uma vida mais saudável e equilibrada?
-          <p><b>Comece pela teoria, nossos E-Books ensinam tudo o que você precisa saber para ter uma vida mais feliz e saudável.</b></p>
-        </div>
-        <Parallax blur={2} bgImage={coach} strength={500}>
-          <div className="box-fit">
-            <Slider {...settings}>
-              <div className="item">
-                <img src={logo1} className="slide" alt="Slide1" />
-                Teste
-              </div>
-              <div className="item">
-                <img src={logo2} className="slide" alt="Slide1" />
-                Teste
-              </div>
-              <div className="item">
-                <img src={logo1} className="slide" alt="Slide1" />
-                Teste
-              </div>
-              <div className="item">
-                <img src={logo2} className="slide" alt="Slide1" />
-                Teste
-              </div>
-              <div className="item">
-                <img src={logo1} className="slide" alt="Slide1" />
-                Teste
-              </div>
-              <div className="item">
-                <img src={logo2} className="slide" alt="Slide1" />
-                Teste
-              </div>
-              <div className="item">
-                <img src={logo1} className="slide" alt="Slide1" />
-                Teste
-              </div>
-              <div className="item">
-                <img src={logo2} className="slide" alt="Slide1" />
-                Teste
-              </div>
-            </Slider>
-          </div>
-        </Parallax>
-      </div>
-    );
+    this.setCategory = this.setCategory.bind(this);
+  }
+  setCategory(category) {
+    this.setState({
+      displayCategory: category
+    });
+  }
+  render() {
+    return <UI setCategory={this.setCategory} state={this.state} />;
   }
 }
 

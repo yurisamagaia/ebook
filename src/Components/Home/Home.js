@@ -14,13 +14,9 @@ class Home extends Component {
       <div className="App">
         <Header />
         <Slide />
-        <ScrollableAnchor id={'fit'}>
-          <Fit />
-        </ScrollableAnchor>
         <ScrollableAnchor id={'coach'}>
           <Coach />
         </ScrollableAnchor>
-        <Footer />
       </div>
     );
   }
